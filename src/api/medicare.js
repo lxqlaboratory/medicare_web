@@ -33,6 +33,13 @@ export function physicalexaminationReportView(perNum) {
   return request({
     url: '/medicare/physicalexaminationReportView',
     method: 'POST',
-    data: {perNum}
+    data: { perNum }
+  })
+}
+export function physicalexaminationApplyView() {
+  return request({
+    url: '/medicare/physicalexaminationApplyView',
+    method: 'POST',
+    data: {}
   })
 }

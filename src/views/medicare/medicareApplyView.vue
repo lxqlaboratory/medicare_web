@@ -10,120 +10,87 @@
       <tr>
         <td colspan="1">您的姓名</td>
         <td colspan="2">
-          {{ form.perName }}
+          {{ perName }}
         </td>
         <td colspan="1">套餐类型</td>
         <td colspan="2">
-          {{ form.projectName }}
+          {{ projectName }}
         </td>
       </tr>
       <tr>
         <td colspan="1" width="200">查体单位</td>
-        <td colspan="2">{{ form.checkName }}</td>
+        <td colspan="2">{{ checkName }}</td>
         <td colspan="1">体检地点</td>
         <td colspan="2">
-          {{ form.checkPlace }}
+          {{ checkPlace }}
         </td>
+      </tr>
+    </table>
+    <table>
 
+      <td style="font-size: 18px;font-weight: bold;color: #304156 ">友情提示: </td>
+      <tr v-for="(items,index) in promptList"  :key="index">
+        <td colspan="6" >{{ items }} </td>
       </tr>
-      <tr>
-        <td colspan="1">友情提示</td>
-        <td colspan="2">
-          aaaaaaa
-        </td>
-        <td colspan="1">注意事项</td>
-        <td colspan="2">
-          啊啊啊
-        </td>
+    </table>
+    <table>
+      <td style="font-size: 18px;font-weight: bold;color: #304156 ">注意事项: </td>
+      <tr v-for="(items,index) in noticeList" :key="index">
+        <td colspan="6" >{{ items }} </td>
       </tr>
-      <tr>
-        <td colspan="1">查体项目</td>
-        <td colspan="5">
-          aaaa
-        </td>
+    </table>
+    <table>
+      <td style="font-size: 18px;font-weight: bold;color: #304156 ">查体项目: </td>
+      <tr v-for="(items,index) in itemList" :key="index">
+        <td colspan="6" >{{ items }} </td>
       </tr>
-
     </table>
     <div align="center">
-      <el-button type="primary" :disabled="isDisable" @click="doSubmit">联系电话</el-button>
+      <el-button type="primary">联系电话：{{this.checkTelephone}}</el-button>
     </div>
 
   </div>
 </template>
 
 <script>
-  import { physicalexaminationApplySubmit } from '@/api/medicare'
-  export default {
-    name: 'medicareApplyView',
-    data() {
-      return {
-        showBank:false,
-        form: {
-        },
-        gender:[
-          {
-            value: '1',
-            label: '男'
-          }, {
-            value: '2',
-            label: '女'
-          }
-        ],
-        isDisable: false
-      }
-    },
-    created() {
-    },
-    methods: {
-      doSubmit() {
-        if(this.form.mobilePhone===undefined || this.form.mobilePhone==='') {
+import { physicalexaminationApplyView } from '@/api/medicare'
+export default {
+  name: 'MedicareApplyView',
+  data() {
+    return {
+      perName: '',
+      checkName: '',
+      projectName: '',
+      checkPlace: '',
+      checkTelephone: '',
+      promptList: [],
+      noticeList: [],
+      itemList: [],
+      year: ''
+    }
+  },
+  created() {
+    this.fetchData()
+  },
+  methods: {
+    fetchData() {
+      physicalexaminationApplyView().then(res => {
+        if (res.re === 1) {
+          this.perName = res.data.perName
+          this.checkName = res.data.checkName
+          this.checkPlace = res.data.checkPlace
+          this.checkTelephone = res.data.checkTelephone
+          this.projectName = res.data.projectName
+          this.promptList = res.data.promptList
+          this.noticeList = res.data.noticeList
+          this.itemList = res.data.itemList
           this.isLoading = false
-          this.$message({
-            message: '手机号不能为空',
-            type: 'success',
-            offset: '10'
-          })
-        }else if(this.form.checkUnit==='0000' || this.form.projectId==='0') {
+        } else {
+          console.log(res)
           this.isLoading = false
-          this.$message({
-            message: '没有选择查体单位和查体套餐，不能提交',
-            type: 'success',
-            offset: '10'
-          })
-        }else {
-          physicalexaminationApplySubmit({
-            form: this.form,
-          }).then(res => {
-            console.log(res)
-            if(res.re===1){
-              this.$message({
-                message: '保存成功',
-                type: 'success',
-                offset: '10'
-              })
-              if (res.confirm) {
-                if(flag.isCollege==='1') {
-                  this.$router.push({name:'medicareReportView'})
-                }else {
-                  this.$router.push({name:'medicareApplyView'})
-                }
-              }
-            } else{
-              this.$message({type: 'error', message: res.data})
-            }
-
-          }).catch(err => {})
         }
-      },
-      bandChange(e){
-        this.form.secondPerType = e
-        if(this.form.secondPerType === '12' ||this.form.secondPerType === undefined || this.form.secondPerType === '13'||this.form.secondPerType === '14'||this.form.secondPerType === '21'||this.form.secondPerType === '31'){
-          this.showBank = true
-        }else {
-          this.showBank = false
-        }
-      },
-
+      })
     }
   }
+}
 </script>
