@@ -2,24 +2,26 @@
   <div class="app-container">
     <table class="content">
       <tr>
-        <td colspan="6" style="font-size: 26px;font-weight: bold;color: #304156 ">请务必确认【聘任类型】正确，否则将影响后期监考费用发放！ </td>
+        <td colspan="6" style="font-size: 26px;font-weight: bold;color: #304156 ">体检报名 </td>
       </tr>
       <tr>
         <td colspan="6" style="font-size: 16px;font-weight: bold;color: #304156 ">个人基本信息</td>
       </tr>
       <tr>
-        <td colspan="1" width="200">工号或学号</td>
-        <td colspan="5">{{ form.perNum }}</td>
-      </tr>
-      <tr>
+        <td colspan="1">工号</td>
+        <td colspan="2">{{ form.perNum }}</td>
         <td colspan="1">姓名</td>
-        <td colspan="5">{{ form.perName }}</td>
+        <td colspan="2">
+          {{ form.perName }}
+        </td>
       </tr>
       <tr>
         <td colspan="1">单位</td>
-        <td colspan="5">
+        <td colspan="2">
           {{ form.collegeName }}
         </td>
+        <td colspan="1" width="200">身份证号</td>
+        <td colspan="2">{{ form.perIdCard }}</td>
       </tr>
       <tr>
         <td colspan="1">性别</td>
@@ -36,57 +38,56 @@
         <td colspan="1">出生日期</td>
         <td colspan="2">
           <el-date-picker
-            v-model="form.perBirthday"
+            v-model="form.perBirth"
             type="date"
             value-format="yyyy-MM-dd"
             placeholder="选择日期时间">
           </el-date-picker>
         </td>
+      </tr>
+      <tr>
+        <td colspan="1">婚姻状态</td>
+        <td colspan="2">
+          <el-select v-model="form.marryStates" size="mini" class="elinput" >
+          </el-select>
+        </td>
+        <td colspan="1">联系方式</td>
+        <td colspan="2">
+          {{ form.mobilePhone }}
+        </td>
 
       </tr>
       <tr>
-        <td colspan="1">聘任类型</td>
-        <td colspan="5">
-          <el-select v-model="form.secondPerType" placeholder="请选择人员类型" style="width: 100%" @change="bandChange">
-            <el-option
-              v-for="item in secondPerTypeList"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value">
-            </el-option>
+        <td colspan="1">体检券</td>
+        <td colspan="2">
+          {{ form.checkDes }}
+        </td>
+        <td colspan="1">*查体单位</td>
+        <td colspan="2">
+          <el-select v-model="form.checkUnitList" size="mini" class="elinput" >
           </el-select>
         </td>
       </tr>
 
       <tr>
-        <td colspan="1">手机号</td>
-        <td colspan="5">
-          <el-input v-model="form.mobilePhone" placeholder="请输入手机号" />
+        <td colspan="1">*查体套餐</td>
+        <td colspan="2">
+          <el-select v-model="form.projectList" size="mini" class="elinput" >
+          </el-select>
         </td>
-
-      </tr>
-      <tr v-if="showBank">
-        <td colspan="1">开户银行</td>
-        <td colspan="5">
-          <el-input v-model="form.bankName" placeholder="请输入开户银行" />
-        </td>
-      </tr>
-      <tr v-if="showBank">
-        <td colspan="1">银行卡号</td>
-        <td colspan="5">
-          <el-input v-model="form.bankNo" placeholder="请输入银行账号" />
+        <td colspan="3">
+          <el-button >展开查体项</el-button>
         </td>
       </tr>
     </table>
     <div align="center">
-      <el-button type="primary" :disabled="isDisable" @click="submit">提交</el-button>
+      <el-button type="primary" :disabled="isDisable" @click="doSubmit">立即报名</el-button>
     </div>
   </div>
 </template>
 
 <script>
-import { personBaseInfoMaintainInit } from '@/api/enroll'
-import { personBaseInfoMaintain } from '@/api/enroll'
+import { physicalexaminationApplySubmit } from '@/api/medicare'
 export default {
   name: 'medicareApply',
   data() {
@@ -124,7 +125,46 @@ export default {
     this.fetchData()
   },
   methods: {
+    doSubmit() {
+      if(this.form.mobilePhone===undefined || this.form.mobilePhone==='') {
+        this.isLoading = false
+        this.$message({
+          message: '手机号不能为空',
+          type: 'success',
+          offset: '10'
+        })
+      }else if(this.form.checkUnit==='0000' || this.form.projectId==='0') {
+        this.isLoading = false
+        this.$message({
+          message: '没有选择查体单位和查体套餐，不能提交',
+          type: 'success',
+          offset: '10'
+        })
+      }else {
+        physicalexaminationApplySubmit({
+          form: this.form,
+        }).then(res => {
+          console.log(res)
+          if(res.re===1){
+            this.$message({
+              message: '保存成功',
+              type: 'success',
+              offset: '10'
+            })
+                if (res.confirm) {
+                  if(flag.isCollege==='1') {
+                    this.$router.push({name:'medicareReportView'})
+                  }else {
+                    this.$router.push({name:'medicareApplyView'})
+                  }
+                }
+          } else{
+            this.$message({type: 'error', message: res.data})
+          }
 
+        }).catch(err => {})
+      }
+    },
     fetchData() {
       personBaseInfoMaintainInit({ 'session': document.cookie, 'personId': this.$route.query.personId }).then(res => {
         console.log(res.data)
@@ -143,71 +183,7 @@ export default {
         this.showBank = false
       }
     },
-    submit() {
-      this.isDisable = true
-      if (this.form.mobilePhone === '' || this.form.mobilePhone === undefined ) {
-        this.$message({
-          message: '手机号不能为空',
-          type: 'success',
-          offset: '10'
-        })
-        setTimeout(() => {
-          this.isDisable = false
-        }, 1000)
-      }else if(this.form.secondPerType === '12' ||this.form.secondPerType === undefined || this.form.secondPerType === '13'||this.form.secondPerType === '14'||this.form.secondPerType === '21'||this.form.secondPerType === '31'){
-        if(this.form.bankNo === ''|| this.form.bankNo ===undefined){
-          this.$message({
-            message: '银行卡号不能为空',
-            type: 'success',
-            offset: '10'
-          })
-          setTimeout(() => {
-            this.isDisable = false
-          }, 1000)
-        }
-        else  if(this.form.bankName === ''||this.form.bankName === undefined){
-          this.$message({
-            message: '银行名称不能为空',
-            type: 'success',
-            offset: '10'
-          })
-          setTimeout(() => {
-            this.isDisable = false
-          }, 1000)
-        }else{
-          personBaseInfoMaintain(this.form
-          ).then(res => {
-            if (res.re === 1) {
-              this.$message({
-                message: '提交成功',
-                type: 'success',
-                offset: '10'
-              })
-            }
-            setTimeout(() => {
-              this.isDisable = false
-            }, 1000)
-          })
 
-        }
-
-      }
-      else {
-        personBaseInfoMaintain(this.form
-        ).then(res => {
-          if (res.re === 1) {
-            this.$message({
-              message: '提交成功',
-              type: 'success',
-              offset: '10'
-            })
-          }
-          setTimeout(() => {
-            this.isDisable = false
-          }, 1000)
-        })
-      }
-    }
   }
 }
 </script>
