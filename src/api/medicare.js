@@ -28,3 +28,10 @@ export function physicalexaminationApply(data) {
     data: data
   })
 }
+export function physicalexaminationReportView(perNum) {
+  return request({
+    url: '/medicare/physicalexaminationReportView',
+    method: 'POST',
+    data: {perNum}
+  })
+}
