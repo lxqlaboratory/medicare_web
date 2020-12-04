@@ -57,12 +57,12 @@
           <td colspan="1">婚姻状态</td>
           <td colspan="2">
             <el-select v-model="form.marryState" :value="form.marryState" size="mini" class="elinput" @change="bindPickerMarryChange">
-            <el-option
-              v-for="item in marryStates"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            />
+              <el-option
+                v-for="item in marryStates"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              />
             </el-select>
           </td>
           <td colspan="1">联系方式</td>
@@ -78,7 +78,7 @@
           </td>
           <td colspan="1">*查体单位</td>
           <td colspan="2">
-            <el-select v-model="form.checkUnit" :value="form.checkUnit" size="mini" class="elinput" @change="bindchangeCheckUnit" >
+            <el-select v-model="form.checkUnit" :value="form.checkUnit" size="mini" class="elinput" @change="bindchangeCheckUnit">
               <el-option
                 v-for="item in checkUnitList"
                 :key="item.value"
@@ -92,7 +92,7 @@
         <tr>
           <td colspan="1">*查体套餐</td>
           <td colspan="2">
-            <el-select v-model="form.projectId" :value="form.projectId" size="mini" class="elinput" @change="bindchangeProject"  >
+            <el-select v-model="form.projectId" :value="form.projectId" size="mini" class="elinput" @change="bindchangeProject">
               <el-option
                 v-for="item in projectList"
                 :key="item.value"
@@ -102,14 +102,14 @@
             </el-select>
           </td>
           <td colspan="3">
-            <el-button @click="show" >展开查体项</el-button>
+            <el-button @click="show">展开查体项</el-button>
           </td>
         </tr>
       </table>
 
       <table>
-        <tr v-for="(items,index) in itemList" :key="index" v-show="showDetail">
-          <td colspan="6" style="font-size: 18px;font-weight: bold;color: #304156 ">{{items}} </td>
+        <tr v-for="(items,index) in itemList" v-show="showDetail" :key="index">
+          <td colspan="6" style="font-size: 18px;font-weight: bold;color: #304156 ">{{ items }} </td>
         </tr>
       </table>
 
@@ -133,7 +133,7 @@ export default {
       start: currentDate,
       end: currentDate,
       showProject: false,
-      showDetail:false,
+      showDetail: false,
       index0: 0,
       form: {
         perNum: '',
@@ -234,7 +234,7 @@ export default {
     bindchangeCheckUnit(e) {
       // this.checkUnitIndex = e.target.value
       // this.form.checkUnit = this.checkUnitList[this.checkUnitIndex].value
-      this.form.projectId = 0;
+      this.form.projectId = 0
 
       physicalexaminationApplyProjectList({
         checkUnit: this.form.checkUnit,
@@ -277,18 +277,13 @@ export default {
             var flag = this
             this.$message({
               message: '保存成功',
-              showCancel: false,
-              success: function(res) {
-                if (res.confirm) {
-                  if (flag.isCollege === '1') {
-                    this.$router.push({ path: 'collegePhysicalExaminationQuery' })
-                  } else {
-                    this.$router.push({ path: 'physicalexaminationApplyView' })
-                  }
-                }
-              }
-
+              showCancel: false
             })
+            if (flag.isCollege === '1') {
+              this.$router.push({ path: 'collegePhysicalExaminationQuery' })
+            } else {
+              this.$router.push({ path: 'physicalexaminationApplyView' })
+            }
           } else {
             this.isLoading = false
             this.$message({
