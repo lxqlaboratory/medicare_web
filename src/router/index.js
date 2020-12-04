@@ -61,7 +61,8 @@ export const constantRoutes = [
       name: 'medicareApply',
       component: () => import('@/views/medicare/medicareApply'),
       meta: { title: '体检报名', icon: 'example'}
-    }]
+    }],
+    meta: { title: '体检报名', icon: 'dashboard',roles: ['4'] }
   },
   {
     path: '/medicare',
@@ -71,7 +72,8 @@ export const constantRoutes = [
       name: 'medicareApplyView',
       component: () => import('@/views/medicare/medicareApplyView'),
       meta: {title: '报名信息查看', icon: 'example'}
-    }]
+    }],
+    meta: { title: '体检报名', icon: 'dashboard',roles: ['6'] }
   },
   {
     path: '/medicare',
@@ -81,8 +83,8 @@ export const constantRoutes = [
       name: 'medicareReportView',
       component: () => import('@/views/medicare/medicareReportView'),
       meta: { title: '体检报告查看', icon: 'example'}
-    }]
-
+    }],
+    meta: { title: '体检报名', icon: 'dashboard',roles: ['7'] }
   },
 
   { path: '/', redirect: '/login', hidden: true },
