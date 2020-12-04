@@ -54,18 +54,54 @@ export const constantRoutes = [
     }]
     // meta: { title: '首页', icon: 'dashboard',roles: ['18'] }
   },
+  // {
+  //   path: '/medicare',
+  //   component: Layout,
+  //   children: [{
+  //     path: 'personInfomation',
+  //     name: 'personInfomation',
+  //     component: () => import('@/views/medicare/personInfomation'),
+  //     meta: { title: '个人信息', icon: 'example'}
+  //   }]
+  //
+  // },
   {
     path: '/medicare',
     component: Layout,
     children: [{
-      path: 'personInfomation',
-      name: 'personInfomation',
-      component: () => import('@/views/medicare/personInfomation'),
-      meta: { title: '个人信息', icon: 'example'}
+      path: 'medicareApply',
+      name: 'medicareApply',
+      component: () => import('@/views/medicare/medicareApply'),
+      meta: { title: '体检报名', icon: 'example'}
+    }]
+
+  },
+  {
+    path: '/medicare',
+    component: Layout,
+    children: [{
+      path: 'medicareApplyView',
+      name: 'medicareApplyView',
+      component: () => import('@/views/medicare/medicareApplyView'),
+      meta: { title: '报名信息查看', icon: 'example'}
+    }]
+
+<<<<<<< HEAD
+=======
+  },
+  {
+    path: '/medicare',
+    component: Layout,
+    children: [{
+      path: 'medicareReportView',
+      name: 'medicareReportView',
+      component: () => import('@/views/medicare/medicareReportView'),
+      meta: { title: '体检报告查看', icon: 'example'}
     }]
 
   },
 
+>>>>>>> da92aa1a5f691664618d95f9912cdc60f6045bb4
   { path: '/', redirect: '/login', hidden: true },
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
