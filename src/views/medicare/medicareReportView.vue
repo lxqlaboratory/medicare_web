@@ -52,9 +52,12 @@
       </el-table-column>
       <el-table-column align="center" label="操作" min-width="25">
         <template slot-scope="scope">
-          <el-button v-if="scope.row.isCheck===true" @click="donlowdExamReport(scope.row.year,'check')" size="mini" type="primary">查体报告下载</el-button>
+          <el-button v-if="scope.row.isAssess===true" size="mini" type="primary">
+            <a :href="serverAddres+'/func/medicare/physicalexaminationReportDownload?year='+scope.row.year+'&&perIdCard='+perIdCard+'&&type='+type1" download="查体报告.pdf">查体报告下载</a></el-button>
           <el-button v-else style="color: black;">未上传查体报告</el-button>
-          <el-button v-if="scope.row.isAssess===true" style="margin-left: 50px;" @click="donlowdExamReport(scope.row.year,'assess')" size="mini" type="primary">评估报告下载</el-button>
+          <el-button v-if="scope.row.isAssess===true" style="margin-left: 50px;"  size="mini" type="primary">
+            <a :href="serverAddres+'/func/medicare/physicalexaminationReportDownload?year='+scope.row.year+'&&perIdCard='+perIdCard+'&&type='+type2 " download="评估报告.pdf">评估报告下载</a>
+            </el-button>
           <el-button v-else style="color: black;margin-left: 50px;">未上传评估报告</el-button>
         </template>
       </el-table-column>
@@ -69,61 +72,30 @@
     data() {
       return {
         list:{
+          serverAddres:'',
           perNum: '',
           perName: '',
           perIdCard: '',
-
+          type1: '',
+          type2: '',
           dataList: [],
         }
 
       }
     },
     created() {
+      this.type1 = 'check'
+      this.type2 = 'assess'
+      this.serverAddres = this.GLOBAL.servicePort
       physicalexaminationReportView().then(res => {
-        console.log("aa"+res.data.perName)
         this.list = res.data
+        this.perIdCard = res.data.perIdCard
         this.list.dataList = res.data.dataList
       });
     },
     methods: {
-      donlowdExamReport(year, type) {
-        wx.downloadFile({
-          url: getApp().globalData.medicareurl + '/medicare/physicalexaminationReportDownload?year=' + year +
-            '&perIdCard=' + this.perIdCard + '&type=' + type,
-          header: {
-            "Content-Type": "application/json",
-            "Cookie": "JSESSIONID=" + getApp().globalData.vueSessionId
-          },
 
-          success: (res) => {
-            if (res.statusCode === 200) {
-              var filePath = res.tempFilePath;
-              console.log(filePath);
-              wx.openDocument({
-                filePath: filePath,
-                fileType: 'pdf',
-                showMenu:true,
-                success: function(res) {
-                  console.log('打开文档成功')
-                },
-                fail: function(res) {
-                  console.log(res);
-                },
-                complete: function(res) {
-                  console.log(res);
-                }
-              })
-
-
-              this.$message({
-                message: '下载成功',
-                type: 'success',
-                offset: '10'
-              })
-            }
-          }
-        });
       }
-    },
+
   }
 </script>

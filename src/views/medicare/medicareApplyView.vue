@@ -12,34 +12,40 @@
         <td colspan="2">
           {{ perName }}
         </td>
-        <td colspan="1">套餐类型</td>
-        <td colspan="2">
-          {{ projectName }}
-        </td>
-      </tr>
-      <tr>
-        <td colspan="1" width="200">查体单位</td>
-        <td colspan="2">{{ checkName }}</td>
         <td colspan="1">体检地点</td>
         <td colspan="2">
           {{ checkPlace }}
         </td>
       </tr>
+      <tr>
+        <td colspan="1" width="200">查体单位</td>
+        <td colspan="2">{{ checkName }}</td>
+        <td colspan="1">套餐类型</td>
+        <td colspan="2">
+          {{ projectName }}
+        </td>
+
+      </tr>
+      <tr>
+        <td colspan="1" width="200">{{filterKey}}</td>
+        <td colspan="5" style="height: 50px">{{ projectSet }}</td>
+
+      </tr>
     </table>
-    <table>
+    <table class="content2">
 
       <td style="font-size: 18px;font-weight: bold;color: #304156 ">友情提示: </td>
       <tr v-for="(items,index) in promptList"  :key="index">
         <td colspan="6" >{{ items }} </td>
       </tr>
     </table>
-    <table>
+    <table class="content2">
       <td style="font-size: 18px;font-weight: bold;color: #304156 ">注意事项: </td>
       <tr v-for="(items,index) in noticeList" :key="index">
         <td colspan="6" >{{ items }} </td>
       </tr>
     </table>
-    <table>
+    <table class="content2">
       <td style="font-size: 18px;font-weight: bold;color: #304156 ">查体项目: </td>
       <tr v-for="(items,index) in itemList" :key="index">
         <td colspan="6" >{{ items }} </td>
@@ -64,6 +70,9 @@ export default {
       checkPlace: '',
       checkTelephone: '',
       promptList: [],
+      projectList: [],
+      projectSet: '',
+      filterKey: '',
       noticeList: [],
       itemList: [],
       year: ''
@@ -84,6 +93,9 @@ export default {
           this.promptList = res.data.promptList
           this.noticeList = res.data.noticeList
           this.itemList = res.data.itemList
+          this.projectList =  res.data.projectOptionList[1]
+          this.filterKey = this.projectList[0].label
+          this.projectSet = this.projectList[0].enLabel
           this.isLoading = false
         } else {
           console.log(res)

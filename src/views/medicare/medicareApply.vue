@@ -78,7 +78,7 @@
           </td>
           <td colspan="1">*查体单位</td>
           <td colspan="2">
-            <el-select v-model="form.checkUnit" :value="form.checkUnit" size="mini" class="elinput" @change="bindchangeCheckUnit">
+            <el-select v-model="form.checkUnit"  size="mini" class="elinput" @change="bindchangeCheckUnit" placeholder="请选择查体单位">
               <el-option
                 v-for="item in checkUnitList"
                 :key="item.value"
@@ -92,7 +92,7 @@
         <tr>
           <td colspan="1">*查体套餐</td>
           <td colspan="2">
-            <el-select v-model="form.projectId" :value="form.projectId" size="mini" class="elinput" @change="bindchangeProject">
+            <el-select v-model="form.projectId"  size="mini" class="elinput" @change="bindchangeProject" placeholder="请选择查体套餐">
               <el-option
                 v-for="item in projectList"
                 :key="item.value"
@@ -107,9 +107,9 @@
         </tr>
       </table>
 
-      <table>
-        <tr v-for="(items,index) in itemList" v-show="showDetail" :key="index">
-          <td colspan="6" style="font-size: 18px;font-weight: bold;color: #304156 ">{{ items }} </td>
+      <table class="content2">
+        <tr v-for="(items,index) in itemList" v-show="showDetail" :key="index" >
+          <td colspan="6" style="font-size: 18px;font-weight: bold;color: #304156; ">{{ items }} </td>
         </tr>
       </table>
 
@@ -234,7 +234,7 @@ export default {
     bindchangeCheckUnit(e) {
       // this.checkUnitIndex = e.target.value
       // this.form.checkUnit = this.checkUnitList[this.checkUnitIndex].value
-      this.form.projectId = 0
+      this.form.projectId = ''
 
       physicalexaminationApplyProjectList({
         checkUnit: this.form.checkUnit,
@@ -282,7 +282,7 @@ export default {
             if (flag.isCollege === '1') {
               this.$router.push({ path: 'collegePhysicalExaminationQuery' })
             } else {
-              this.$router.push({ path: 'physicalexaminationApplyView' })
+              this.$router.push({ path: 'medicareApplyView' })
             }
           } else {
             this.isLoading = false
