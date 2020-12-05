@@ -55,7 +55,8 @@
       </el-table-column>
       <el-table-column align="center" label="操作" min-width="8">
         <template slot-scope="scope">
-          <el-button @click="$router.push({ path: 'MedicareApply' })" size="mini" type="primary">报名</el-button>
+          <el-button @click="$router.push({ path: 'MedicareApply', query: { 'perNum': scope.row.perNum ,'isCollege': '1' }} )
+" size="mini" type="primary">报名</el-button>
         </template>
       </el-table-column>
     </el-table>

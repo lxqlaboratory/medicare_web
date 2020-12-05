@@ -32,7 +32,7 @@
           <td colspan="2">{{ form.perIdCard }}</td>
         </tr>
         <tr>
-          <td colspan="1">性别</td>
+          <td colspan="1">*性别</td>
           <td colspan="2">
             <el-select v-model="form.genderCode" :value="form.genderCode" size="mini" class="elinput" @change="bindPickerGenderChange">
               <el-option
@@ -43,7 +43,7 @@
               />
             </el-select>
           </td>
-          <td colspan="1">出生日期</td>
+          <td colspan="1">*出生日期</td>
           <td colspan="2">
             <el-date-picker
               v-model="form.perBirth"
@@ -54,7 +54,7 @@
           </td>
         </tr>
         <tr>
-          <td colspan="1">婚姻状态</td>
+          <td colspan="1">*婚姻状态</td>
           <td colspan="2">
             <el-select v-model="form.marryState" :value="form.marryState" size="mini" class="elinput" @change="bindPickerMarryChange">
               <el-option
@@ -65,9 +65,9 @@
               />
             </el-select>
           </td>
-          <td colspan="1">联系方式</td>
+          <td colspan="1">*联系方式</td>
           <td colspan="2">
-            {{ form.mobilePhone }}
+            <el-input v-model="form.mobilePhone" placeholder="请输入联系方式"></el-input>
           </td>
 
         </tr>
@@ -187,6 +187,8 @@ export default {
     }
   },
   created() {
+    this.isCollege = this.$route.query.isCollege
+    console.log(this.isCollege)
     this.fetchData()
   },
   methods: {
@@ -202,7 +204,7 @@ export default {
     },
     fetchData() {
       physicalexaminationApply({
-        perNum: this.form.perNum
+        perNum: this.$route.query.perNum
       }).then(res => {
         this.showProject = false
         if (res.re === 1) {
@@ -280,7 +282,7 @@ export default {
               showCancel: false
             })
             if (flag.isCollege === '1') {
-              this.$router.push({ path: 'collegePhysicalExaminationQuery' })
+              this.$router.push({ path: 'medicareExaminationQuery' })
             } else {
               this.$router.push({ path: 'medicareApplyView' })
             }
