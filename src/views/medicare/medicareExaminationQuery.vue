@@ -17,7 +17,8 @@
       </tr>
 
     </table>
-
+    <el-button v-if="personList.length> 0" size="mini" type="primary">
+      <a :href="serverAddres+'/func/medicare/exportCollegePhysicalExaminationInfoList?checkUnit='+checkUnit" download="人员名单.xls">导出人员名单</a></el-button>
     <el-table
       v-show="disabled"
       v-loading="onLoading"
@@ -75,6 +76,8 @@ export default {
     return {
       statisticsList: [],
       personList: [],
+      serverAddres:'',
+      checkUnit: '00',
       disabled: false
     }
   },
@@ -82,7 +85,9 @@ export default {
     this.fetchData()
   },
   methods: {
+
     fetchData() {
+      this.serverAddres = this.GLOBAL.servicePort
       collegePhysicalExaminationQuery().then(res => {
         if (res.re === 1) {
           this.statisticsList = res.data.statisticsList
@@ -95,6 +100,7 @@ export default {
     },
     doDetail(checkUnit) {
       this.disabled = true
+      this.checkUnit = checkUnit
       collegePhysicalExaminationInfoList(checkUnit).then(res => {
         if (res.re === 1) {
           this.personList = res.data

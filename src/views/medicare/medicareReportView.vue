@@ -71,14 +71,14 @@
     name: 'medicareReportView',
     data() {
       return {
+        serverAddres:'',
+        type1: '',
+        type2: '',
         list:{
-          serverAddres:'',
           perNum: '',
           perName: '',
           perIdCard: '',
-          type1: '',
-          type2: '',
-          dataList: [],
+          dataList: []
         }
 
       }
