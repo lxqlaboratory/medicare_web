@@ -86,7 +86,17 @@ export const constantRoutes = [
     }],
     meta: { title: '体检报名', icon: 'dashboard',roles: ['7'] }
   },
+  {
+    path: '/medicare',
+    component: Layout,
+    children: [{
+      path: 'medicareExaminationQuery',
+      name: 'medicareExaminationQuery',
+      component: () => import('@/views/medicare/medicareExaminationQuery'),
+      meta: { title: '体检报名情况', icon: 'example'}
+    }]
 
+  },
   { path: '/', redirect: '/login', hidden: true },
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
