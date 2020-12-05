@@ -9,54 +9,58 @@
       </tr>
       <tr v-for="(item,index) in statisticsList" :key="index">
         <td colspan="1">查体单位</td>
-        <td colspan="2" >{{item.checkUnitName}}
+        <td colspan="2">{{ item.checkUnitName }}
         </td>
         <td colspan="1">申请人数</td>
-        <td  colspan="1">{{item.count}}</td>
-        <td  colspan="1"> <el-button @click="doDetail(item.checkUnit)" type="primary">查看</el-button></td>
+        <td colspan="1">{{ item.count }}</td>
+        <td colspan="1"> <el-button type="primary" @click="doDetail(item.checkUnit)">查看</el-button></td>
       </tr>
 
     </table>
 
     <el-table
       v-show="disabled"
+      v-loading="onLoading"
       :data="personList"
       border
       fit
       highlight-current-row
       stripe
       style="margin-top: 15px;"
-      v-loading="onLoading"
     >
       <el-table-column align="center" label="工号" min-width="8">
         <template slot-scope="scope">
-          {{scope.row.perNum}}
+          {{ scope.row.perNum }}
         </template>
       </el-table-column>
       <el-table-column align="center" label="姓名" min-width="8">
-      <template slot-scope="scope">
-        {{scope.row.perName}}
-      </template>
-    </el-table-column>
+        <template slot-scope="scope">
+          {{ scope.row.perName }}
+        </template>
+      </el-table-column>
       <el-table-column align="center" label="体检券" min-width="8">
         <template slot-scope="scope">
-          {{scope.row.baseCheck}}
+          {{ scope.row.baseCheck }}
         </template>
       </el-table-column>
       <el-table-column align="center" label="套餐" min-width="8">
         <template slot-scope="scope">
-          {{scope.row.projectName}}
+          {{ scope.row.projectName }}
         </template>
       </el-table-column>
       <el-table-column align="center" label="联系电话" min-width="8">
         <template slot-scope="scope">
-          {{scope.row.mobilePhone}}
+          {{ scope.row.mobilePhone }}
         </template>
       </el-table-column>
       <el-table-column align="center" label="操作" min-width="8">
         <template slot-scope="scope">
-          <el-button @click="$router.push({ path: 'MedicareApply', query: { 'perNum': scope.row.perNum ,'isCollege': '1' }} )
-" size="mini" type="primary">报名</el-button>
+          <el-button
+            size="mini"
+            type="primary"
+            @click="$router.push({ path: 'MedicareApply', query: { 'perNum': scope.row.perNum ,'isCollege': '1' }} )
+            "
+          >报名</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -64,14 +68,14 @@
 </template>
 
 <script>
-import { collegePhysicalExaminationQuery,collegePhysicalExaminationInfoList } from '@/api/medicare'
+import { collegePhysicalExaminationQuery, collegePhysicalExaminationInfoList } from '@/api/medicare'
 export default {
-  name: 'medicareExaminationQuery',
+  name: 'MedicareExaminationQuery',
   data() {
     return {
-      statisticsList:[],
-      personList:[],
-      disabled:false
+      statisticsList: [],
+      personList: [],
+      disabled: false
     }
   },
   created() {
@@ -88,7 +92,6 @@ export default {
           this.isLoading = false
         }
       })
-
     },
     doDetail(checkUnit) {
       this.disabled = true
@@ -99,7 +102,7 @@ export default {
           console.log(res)
         }
       })
-    },
+    }
 
   }
 }
