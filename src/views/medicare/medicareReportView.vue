@@ -52,7 +52,7 @@
       </el-table-column>
       <el-table-column align="center" label="操作" min-width="25">
         <template slot-scope="scope">
-          <el-button v-if="scope.row.isAssess===true" size="mini" type="primary">
+          <el-button v-if="scope.row.isCheck===true" size="mini" type="primary">
             <a :href="serverAddres+'/func/medicare/physicalexaminationReportDownload?year='+scope.row.year+'&&perIdCard='+perIdCard+'&&type='+type1" download="查体报告.pdf">查体报告下载</a></el-button>
           <el-button v-else style="color: black;">未上传查体报告</el-button>
           <el-button v-if="scope.row.isAssess===true" style="margin-left: 50px;"  size="mini" type="primary">

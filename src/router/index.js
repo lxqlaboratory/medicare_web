@@ -94,8 +94,8 @@ export const constantRoutes = [
       name: 'medicareExaminationQuery',
       component: () => import('@/views/medicare/medicareExaminationQuery'),
       meta: { title: '体检报名情况', icon: 'example'}
-    }]
-
+    }],
+    meta: { title: '体检报名情况', icon: 'dashboard',roles: ['10'] }
   },
   { path: '/', redirect: '/login', hidden: true },
   // 404 page must be placed at the end !!!
