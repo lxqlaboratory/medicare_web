@@ -97,6 +97,26 @@ export const constantRoutes = [
     }],
     meta: { title: '体检报名情况', icon: 'dashboard',roles: ['10'] }
   },
+  {
+    path: '/medicare',
+    component: Layout,
+    children: [{
+      path: 'StudentMedicareApply',
+      name: 'StudentMedicareApply',
+      component: () => import('@/views/medicare/studentMedicareApply'),
+      meta: { title: '医保报名', icon: 'example'}
+    }],
+  },
+  {
+    path: '/medicare',
+    component: Layout,
+    children: [{
+      path: 'StudentMedicareApplyView',
+      name: 'StudentMedicareApplyView',
+      component: () => import('@/views/medicare/studentMedicareApplyView'),
+      meta: { title: '报名信息查看', icon: 'example'}
+    }],
+  },
   { path: '/', redirect: '/login', hidden: true },
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }

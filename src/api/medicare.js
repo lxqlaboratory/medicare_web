@@ -57,3 +57,24 @@ export function collegePhysicalExaminationInfoList(checkUnit) {
     data: {checkUnit}
   })
 }
+export function studentMedicareApply(data) {
+  return request({
+    url: '/medicare/studentMedicareApply',
+    method: 'POST',
+    data: {data}
+  })
+}
+export function studentMedicareApplySubmit(form) {
+  return request({
+    url: '/medicare/studentMedicareApplySubmit',
+    method: 'POST',
+    data: {form}
+  })
+}
+export function studentMedicareApplyView(data) {
+  return request({
+    url: '/medicare/studentMedicareApplyView',
+    method: 'POST',
+    data: {data}
+  })
+}
