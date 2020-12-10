@@ -242,7 +242,7 @@ export default {
               showCancel: false
             })
             if (flag.isCollege === '1') {
-              // this.$router.push({ path: '' })
+              this.$router.push({ path: 'CollegeMedicareApplyQuery' })
             } else {
               this.$router.push({ path: 'StudentMedicareApplyView' })
             }
