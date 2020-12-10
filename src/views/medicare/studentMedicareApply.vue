@@ -241,6 +241,11 @@ export default {
               message: '保存成功',
               showCancel: false
             })
+            if (flag.isCollege === '1') {
+              // this.$router.push({ path: '' })
+            } else {
+              this.$router.push({ path: 'StudentMedicareApplyView' })
+            }
           } else {
             this.$message({
               message: '保存失败',
