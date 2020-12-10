@@ -10,7 +10,7 @@
     <div v-else>
       <table class="content">
         <tr>
-          <td colspan="6" style="font-size: 26px;font-weight: bold;color: #304156 ">医保报名 </td>
+          <td colspan="6" style="font-size: 26px;font-weight: bold;color: #304156 ">医保信息报名 </td>
         </tr>
         <tr>
           <td colspan="6" style="font-size: 16px;font-weight: bold;color: #304156 ">请仔细核对个人信息！选择缴费方式,若选择弃保请选择已缴保地区，点击“提交”即可，弃保请提交后下载弃保声明。如信息有误请联系学院修改!</td>

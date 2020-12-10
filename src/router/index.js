@@ -104,7 +104,7 @@ export const constantRoutes = [
       path: 'StudentMedicareApply',
       name: 'StudentMedicareApply',
       component: () => import('@/views/medicare/studentMedicareApply'),
-      meta: { title: '医保报名', icon: 'example'}
+      meta: { title: '医保信息报名', icon: 'example'}
     }],
   },
   {
@@ -114,7 +114,17 @@ export const constantRoutes = [
       path: 'StudentMedicareApplyView',
       name: 'StudentMedicareApplyView',
       component: () => import('@/views/medicare/studentMedicareApplyView'),
-      meta: { title: '报名信息查看', icon: 'example'}
+      meta: { title: '医保报名信息查看', icon: 'example'}
+    }],
+  },
+  {
+    path: '/medicare',
+    component: Layout,
+    children: [{
+      path: 'CollegeMedicareApplyQuery',
+      name: 'CollegeMedicareApplyQuery',
+      component: () => import('@/views/medicare/collegeMedicareApplyQuery'),
+      meta: { title: '本科生医保报名查询', icon: 'example'}
     }],
   },
   { path: '/', redirect: '/login', hidden: true },

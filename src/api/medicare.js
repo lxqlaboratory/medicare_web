@@ -61,7 +61,7 @@ export function studentMedicareApply(data) {
   return request({
     url: '/medicare/studentMedicareApply',
     method: 'POST',
-    data: {data}
+    data
   })
 }
 export function studentMedicareApplySubmit(data) {
@@ -76,5 +76,26 @@ export function studentMedicareApplyView(data) {
     url: '/medicare/studentMedicareApplyView',
     method: 'POST',
     data: {data}
+  })
+}
+export function collegeMedicareApplyQuery(data) {
+  return request({
+    url: '/medicare/collegeMedicareApplyQuery',
+    method: 'POST',
+    data:data
+  })
+}
+export function collegeMedicareApplyInfoList(data) {
+  return request({
+    url: '/medicare/collegeMedicareApplyInfoList',
+    method: 'POST',
+    data:data
+  })
+}
+export function collegeMedicareApplyStatisticsList(data) {
+  return request({
+    url: '/medicare/collegeMedicareApplyStatisticsList',
+    method: 'POST',
+    data:data
   })
 }
