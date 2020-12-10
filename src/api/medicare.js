@@ -64,11 +64,11 @@ export function studentMedicareApply(data) {
     data: {data}
   })
 }
-export function studentMedicareApplySubmit(form) {
+export function studentMedicareApplySubmit(data) {
   return request({
     url: '/medicare/studentMedicareApplySubmit',
     method: 'POST',
-    data: {form}
+    data
   })
 }
 export function studentMedicareApplyView(data) {

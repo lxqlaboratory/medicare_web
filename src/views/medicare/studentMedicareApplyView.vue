@@ -36,6 +36,8 @@
             type="date"
             value-format="yyyy-MM-dd"
             placeholder="选择日期时间"
+            size="small"
+            style="width: 150px"
           />
         </td>
         <td colspan="1">*联系方式</td>
@@ -64,23 +66,6 @@
         <td colspan="2">{{ form.payStatus }}</td>
         <td colspan="1" >*缴费方式</td>
         <td colspan="2">{{form.modelPayName}}</td>
-      </tr>
-      <tr v-if="form.modelPay==='2'">
-        <td colspan="1">请选择缴保省</td>
-        <td colspan="1">
-          <el-select v-model="form.majorName"size="mini" class="elinput">
-          </el-select>
-        </td>
-        <td colspan="1">请选择缴保市</td>
-        <td colspan="1">
-          <el-select v-model="form.majorName"size="mini" class="elinput">
-          </el-select>
-        </td>
-        <td colspan="1">请选择缴保区</td>
-        <td colspan="1">
-          <el-select v-model="form.majorName"size="mini" class="elinput">
-          </el-select>
-        </td>
       </tr>
     </table>
 

@@ -46,11 +46,13 @@
               type="date"
               value-format="yyyy-MM-dd"
               placeholder="选择日期时间"
+              size="small"
+              style="width: 150px"
             />
           </td>
           <td colspan="1">*联系方式</td>
           <td colspan="2">
-            <el-input v-model="form.mobilePhone" placeholder="请输入联系方式"></el-input>
+            <el-input style="width: 150px;" v-model="form.mobilePhone" placeholder="请输入联系方式"></el-input>
           </td>
         </tr>
         <tr>
@@ -86,20 +88,10 @@
             </td>
         </tr>
         <tr v-if="form.modelPay==='2'">
-          <td colspan="1">请选择缴保省</td>
-          <td colspan="1">
-            <el-select v-model="form.majorName"size="mini" class="elinput">
-            </el-select>
-          </td>
-          <td colspan="1">请选择缴保市</td>
-          <td colspan="1">
-            <el-select v-model="form.majorName"size="mini" class="elinput">
-            </el-select>
-          </td>
-          <td colspan="1">请选择缴保区</td>
-          <td colspan="1">
-            <el-select v-model="form.majorName"size="mini" class="elinput">
-            </el-select>
+          <td colspan="1">请选择缴保地</td>
+
+          <td colspan="5" style="width: 200px">
+            <v-distpicker @province="onChangeProvince" @city="onChangeCity" @area="onChangeArea"></v-distpicker>
           </td>
         </tr>
       </table>
@@ -112,6 +104,7 @@
 
 <script>
 import { studentMedicareApplySubmit,studentMedicareApply  } from '@/api/medicare'
+import VDistpicker from 'v-distpicker'
 export default {
   name: 'StudentMedicareApply',
   data() {
@@ -119,6 +112,7 @@ export default {
       format: true
     })
     return {
+      txt1:'',
       date: currentDate,
       start: currentDate,
       end: currentDate,
@@ -173,17 +167,27 @@ export default {
       return this.getDate('end')
     }
   },
+  components: { VDistpicker },
   created() {
     this.isCollege = this.$route.query.isCollege
     this.fetchData()
   },
   methods: {
+    onChangeProvince(a){
+      this.form.province = a.value
+    },onChangeCity(a){
+      this.form.city = a.value
+    },
+    onChangeArea(a){
+      this.form.town = a.value
+    },
     fetchData() {
       studentMedicareApply({
         perNum: this.$route.query.perNum
       }).then(res => {
         if (res.re === 1) {
           this.form = res.data.form
+          this.form.perNum  = res.data.form.perNum
           this.isMedicareClose = res.data.isMedicareClose
           this.year = res.data.year
         } else {
@@ -228,7 +232,6 @@ export default {
           showCancel: false
         })
       } else {
-        console.log(this.form.perNum+"22")
         studentMedicareApplySubmit({
           form: this.form
         }).then(res => {
