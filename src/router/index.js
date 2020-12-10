@@ -126,6 +126,15 @@ export const constantRoutes = [
       component: () => import('@/views/medicare/collegeMedicareApplyQuery'),
       meta: { title: '本科生医保报名查询', icon: 'example'}
     }],
+  }, {
+    path: '/medicare',
+    component: Layout,
+    children: [{
+      path: 'MasterMedicareApplyQuery',
+      name: 'MasterMedicareApplyQuery',
+      component: () => import('@/views/medicare/masterMedicareApplyQuery'),
+      meta: { title: '研究生医保报名查询', icon: 'example'}
+    }],
   },
   { path: '/', redirect: '/login', hidden: true },
   // 404 page must be placed at the end !!!
