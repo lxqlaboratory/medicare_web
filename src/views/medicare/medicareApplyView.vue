@@ -26,7 +26,7 @@
         </td>
 
       </tr>
-      <tr>
+      <tr v-if="projectAddName!=''">
         <td colspan="1" width="200">{{projectAddName}}</td>
         <td colspan="5" style="height: 50px">{{ projectSet }}</td>
 
