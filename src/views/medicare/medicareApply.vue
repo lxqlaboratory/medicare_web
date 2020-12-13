@@ -15,7 +15,7 @@
         <tr>
           <td colspan="6" style="font-size: 16px;font-weight: bold;color: #304156 ">个人基本信息</td>
         </tr>
-        <tr>
+        <tr style="height: 30px">
           <td colspan="1">工号</td>
           <td colspan="2">{{ form.perNum }}</td>
           <td colspan="1">姓名</td>
@@ -23,7 +23,7 @@
             {{ form.perName }}
           </td>
         </tr>
-        <tr>
+        <tr style="height: 30px">
           <td colspan="1">单位</td>
           <td colspan="2">
             {{ form.collegeName }}
@@ -71,7 +71,7 @@
           </td>
 
         </tr>
-        <tr>
+        <tr style="height: 30px">
           <td colspan="1">体检券</td>
           <td colspan="2">
             {{ form.checkDes }}

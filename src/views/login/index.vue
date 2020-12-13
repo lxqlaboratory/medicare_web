@@ -114,7 +114,7 @@ export default {
   },
   methods: {
     fetchData: function() {
-      this.$router.push({ path: '/dashboard' })
+      // this.$router.push({ path: '/dashboard' })
     },
     showPwd() {
       if (this.passwordType === 'password') {

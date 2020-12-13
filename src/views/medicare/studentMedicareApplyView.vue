@@ -1,10 +1,10 @@
 <template>
   <div class="app-container">
     <table class="content">
-      <tr>
+      <tr >
         <td colspan="6" style="font-size: 26px;font-weight: bold;color: #304156 ">报名信息 </td>
       </tr>
-      <tr>
+      <tr style="height: 30px">
         <td colspan="1">学号</td>
         <td colspan="2">{{ form.perNum }}</td>
         <td colspan="1">姓名</td>
@@ -12,7 +12,7 @@
           {{ form.perName }}
         </td>
       </tr>
-      <tr>
+      <tr >
         <td colspan="1" width="200">身份证号</td>
         <td colspan="2">{{ form.perIdCard }}</td>
         <td colspan="1">*性别</td>
@@ -27,7 +27,7 @@
           </el-select>
         </td>
       </tr>
-      <tr>
+      <tr style="height: 30px">
         <td colspan="1">*出生日期</td>
         <td colspan="2">
           <el-date-picker
@@ -45,7 +45,7 @@
           {{form.mobilePhone}}
         </td>
       </tr>
-      <tr>
+      <tr style="height: 30px">
         <td colspan="1">所在学院</td>
         <td colspan="2">{{ form.collegeName }}</td>
         <td colspan="1">所学专业</td>
@@ -53,7 +53,7 @@
           {{ form.majorName }}
         </td>
       </tr>
-      <tr>
+      <tr style="height: 30px">
         <td colspan="1">所在年级</td>
         <td colspan="2">{{ form.grade }}</td>
         <td colspan="1">所在班级</td>
@@ -61,11 +61,15 @@
           {{ form.perClass }}
         </td>
       </tr>
-      <tr>
+      <tr style="height: 30px">
         <td colspan="1">缴费状态</td>
         <td colspan="2">{{ form.payStatus }}</td>
         <td colspan="1" >*缴费方式</td>
         <td colspan="2">{{form.modelPayName}}</td>
+      </tr>
+      <tr style="height: 30px">
+        <td colspan="1">流水号</td>
+        <td colspan="5">{{ form.insuredNumber }}</td>
       </tr>
     </table>
 
@@ -103,6 +107,7 @@ export default {
         province: '',
         city: '',
         town: '',
+        insuredNumber: ''
       },
     }
   },

@@ -73,7 +73,7 @@ export const constantRoutes = [
       component: () => import('@/views/medicare/medicareApplyView'),
       meta: {title: '报名信息查看', icon: 'example'}
     }],
-    meta: { title: '体检报名', icon: 'dashboard',roles: ['6'] }
+    meta: { title: '报名信息查看', icon: 'dashboard',roles: ['6'] }
   },
   {
     path: '/medicare',
@@ -84,7 +84,7 @@ export const constantRoutes = [
       component: () => import('@/views/medicare/medicareReportView'),
       meta: { title: '体检报告查看', icon: 'example'}
     }],
-    meta: { title: '体检报名', icon: 'dashboard',roles: ['7'] }
+    meta: { title: '体检报告查看', icon: 'dashboard',roles: ['7'] }
   },
   {
     path: '/medicare',
@@ -104,8 +104,9 @@ export const constantRoutes = [
       path: 'StudentMedicareApply',
       name: 'StudentMedicareApply',
       component: () => import('@/views/medicare/studentMedicareApply'),
-      meta: { title: '医保信息报名', icon: 'example'}
+      meta: { title: '医保信息报名', icon: 'example',roles: ['3']}
     }],
+    meta: { title: '医保信息报名', icon: 'dashboard',roles: ['3'] }
   },
   {
     path: '/medicare',
@@ -114,8 +115,9 @@ export const constantRoutes = [
       path: 'StudentMedicareApplyView',
       name: 'StudentMedicareApplyView',
       component: () => import('@/views/medicare/studentMedicareApplyView'),
-      meta: { title: '医保报名信息查看', icon: 'example'}
+      meta: { title: '医保报名信息查看', icon: 'example',roles: ['5']}
     }],
+    meta: { title: '医保报名信息查看', icon: 'dashboard',roles: ['5'] }
   },
   {
     path: '/medicare',
@@ -124,8 +126,9 @@ export const constantRoutes = [
       path: 'CollegeMedicareApplyQuery',
       name: 'CollegeMedicareApplyQuery',
       component: () => import('@/views/medicare/collegeMedicareApplyQuery'),
-      meta: { title: '本科生医保报名查询', icon: 'example'}
+      meta: { title: '本科生医保报名查询', icon: 'example',roles: ['8']}
     }],
+    meta: { title: '本科生医保报名查询', icon: 'example',roles: ['8']}
   }, {
     path: '/medicare',
     component: Layout,
@@ -133,8 +136,9 @@ export const constantRoutes = [
       path: 'MasterMedicareApplyQuery',
       name: 'MasterMedicareApplyQuery',
       component: () => import('@/views/medicare/masterMedicareApplyQuery'),
-      meta: { title: '研究生医保报名查询', icon: 'example'}
+      meta: { title: '研究生医保报名查询', icon: 'example',roles: ['9']}
     }],
+    meta: { title: '研究生医保报名查询', icon: 'example',roles: ['9']}
   },
   { path: '/', redirect: '/login', hidden: true },
   // 404 page must be placed at the end !!!
