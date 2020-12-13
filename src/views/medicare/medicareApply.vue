@@ -34,7 +34,7 @@
         <tr>
           <td colspan="1">*性别</td>
           <td colspan="2">
-            <el-select v-model="form.genderCode" :value="form.genderCode" size="mini" class="elinput" @change="bindPickerGenderChange">
+            <el-select v-model="form.genderCode"  size="mini" class="elinput" @change="bindPickerGenderChange">
               <el-option
                 v-for="item in genders"
                 :key="item.value"
@@ -56,7 +56,7 @@
         <tr>
           <td colspan="1">*婚姻状态</td>
           <td colspan="2">
-            <el-select v-model="form.marryState" :value="form.marryState" size="mini" class="elinput" @change="bindPickerMarryChange">
+            <el-select v-model="form.marryState"  size="mini" class="elinput" @change="bindPickerMarryChange">
               <el-option
                 v-for="item in marryStates"
                 :key="item.value"
@@ -78,7 +78,7 @@
           </td>
           <td colspan="1">*查体单位</td>
           <td colspan="2">
-            <el-select v-model="form.checkUnit"  size="mini" class="elinput" @change="bindchangeCheckUnit" placeholder="请选择查体单位">
+            <el-select v-model="form.checkUnit"  size="mini" class="elinput" style="width: 90%" @change="bindchangeCheckUnit" placeholder="请选择查体单位">
               <el-option
                 v-for="item in checkUnitList"
                 :key="item.value"
