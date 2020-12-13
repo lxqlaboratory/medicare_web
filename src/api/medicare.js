@@ -1,5 +1,13 @@
 import request from '@/utils/request'
 
+export function getSystemNoticeInfo() {
+  return request({
+    url: '/medicare/getSystemNoticeInfo',
+    method: 'POST',
+    data: {}
+  })
+}
+
 export function physicalexaminationApplySubmit(data) {
   return request({
     url: '/medicare/physicalexaminationApplySubmit',
