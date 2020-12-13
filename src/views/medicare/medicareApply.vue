@@ -12,9 +12,7 @@
         <tr>
           <td colspan="6" style="font-size: 26px;font-weight: bold;color: #304156 ">体检报名 </td>
         </tr>
-        <tr>
-          <td colspan="6" style="font-size: 16px;font-weight: bold;color: #304156 ">个人基本信息</td>
-        </tr>
+       
         <tr style="height: 30px">
           <td colspan="1">工号</td>
           <td colspan="2">{{ form.perNum }}</td>

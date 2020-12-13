@@ -27,7 +27,7 @@
 
       </tr>
       <tr>
-        <td colspan="1" width="200">{{filterKey}}</td>
+        <td colspan="1" width="200">{{projectAddName}}</td>
         <td colspan="5" style="height: 50px">{{ projectSet }}</td>
 
       </tr>
@@ -68,6 +68,7 @@ export default {
       checkName: '',
       projectName: '',
       checkPlace: '',
+      projectAddName: '',
       checkTelephone: '',
       promptList: [],
       projectList: [],
@@ -93,9 +94,8 @@ export default {
           this.promptList = res.data.promptList
           this.noticeList = res.data.noticeList
           this.itemList = res.data.itemList
-          this.projectList =  res.data.projectOptionList[1]
-          this.filterKey = this.projectList[0].label
-          this.projectSet = this.projectList[0].enLabel
+          this.projectSet = res.data.projectSet
+          this.projectAddName = res.data.projectAddName
           this.isLoading = false
         } else {
           console.log(res)
